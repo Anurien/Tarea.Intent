@@ -26,11 +26,10 @@ class MainActivity : AppCompatActivity() {
         calculo.setOnClickListener {
             val intento1 = Intent(this, SecondActivity::class.java)
             // Añade datos adicionales al Intent
-            intento1.putExtra("EXTRA_MESSAGE", 8)
-            intento1.putExtra("EXTRA_MESSAGE1", 7)
+            intento1.putExtra("num1", 8)
+            intento1.putExtra("num2", 7)
             // Inicia la segunda actividad
             startActivityForResult(intento1, REQUEST_OPERATION)
-
         }
     }
 
@@ -53,7 +52,8 @@ class MainActivity : AppCompatActivity() {
                 // si el intent no es null muestro el resultado
                 if (data != null) {
                     Log.d("asd", "recibido")
-                    textView.text = data.getIntExtra("suma",0).toString()
+                    data.getIntExtra("suma",0).toString()
+                    textView.text = "Bien"
                 }; }
         }
     }
