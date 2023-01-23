@@ -12,6 +12,8 @@ import android.widget.ImageView
 import android.widget.TextView
 
 class MainActivity : AppCompatActivity() {
+    var random = (0..9).random()
+    var random2 = (0..9).random()
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -26,8 +28,8 @@ class MainActivity : AppCompatActivity() {
         calculo.setOnClickListener {
             val intento1 = Intent(this, SecondActivity::class.java)
             // Añade datos adicionales al Intent
-            intento1.putExtra("num1", (0..9).random())
-            intento1.putExtra("num2", (0..9).random())
+            intento1.putExtra("num1", random)
+            intento1.putExtra("num2", random2)
             // Inicia la segunda actividad
             startActivityForResult(intento1, REQUEST_OPERATION)
         }
@@ -52,8 +54,13 @@ class MainActivity : AppCompatActivity() {
                 // si el intent no es null muestro el resultado
                 if (data != null) {
                     Log.d("asd", "recibido")
-                    data.getIntExtra("suma",0).toString()
-                    textView.text = "Bien"
+                    var resultado = data.getIntExtra("suma", 0).toString()
+                    if (resultado.toInt() == (random + random2)) {
+                        textView.text = "Bien " + data.getIntExtra("suma", 0).toString()
+                    } else {
+                        textView.text = "Mal " + data.getIntExtra("suma", 0).toString()
+                    }
+
                 }; }
         }
     }
